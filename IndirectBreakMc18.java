@@ -1,4 +1,4 @@
-package me.ipodtouch0218.indirectbreak;
+package me.ipodtouch0218.superr.customplants.util;
 
 import java.math.BigInteger;
 import java.util.Arrays;
@@ -93,7 +93,7 @@ public class IndirectBreakMc18 implements Listener {
 					!east.getType().isSolid() &&
 					!south.getType().isSolid() &&
 					!west.getType().isSolid() &&
-					dMat == Material.SAND;
+					(dMat == Material.SAND || dMat == Material.CACTUS);
 		}
 		case SUGAR_CANE_BLOCK: {
 			return dMat == Material.SUGAR_CANE_BLOCK ||
@@ -350,6 +350,9 @@ public class IndirectBreakMc18 implements Listener {
 		case DIODE_BLOCK_OFF:
 		case DIODE_BLOCK_ON: {
 			return down.getType().isSolid() && !down.getType().isTransparent();
+		}
+		case FIRE: {
+			return down.getType().isFlammable();
 		}
 		default: {
 			return true;
