@@ -198,17 +198,12 @@ public class IndirectBreakMc18 implements Listener {
 			}
 		}
 		case VINE: {
-			BigInteger data = BigInteger.valueOf(b.getData());
-			boolean connectedSouth = data.testBit(0);
-			boolean connectedWest = data.testBit(1);
-			boolean connectedNorth = data.testBit(2);
-			boolean connectedEast = data.testBit(3);
-			
+			byte data = b.getData();
 			return b.getRelative(BlockFace.UP).getType() == Material.VINE ||
-					(connectedSouth && (south.getType().isSolid() && !south.getType().isTransparent())) ||
-					(connectedWest && (west.getType().isSolid() && !west.getType().isTransparent())) ||
-					(connectedNorth && (north.getType().isSolid() && !north.getType().isTransparent())) ||
-					(connectedEast && (east.getType().isSolid() && !east.getType().isTransparent()));
+					((data & 0b0001) != 0 && (south.getType().isSolid() && !south.getType().isTransparent())) ||
+					((data & 0b0010) != 0 && (west.getType().isSolid() && !west.getType().isTransparent())) ||
+					((data & 0b0100) != 0 && (north.getType().isSolid() && !north.getType().isTransparent())) ||
+					((data & 0b1000) != 0 && (east.getType().isSolid() && !east.getType().isTransparent()));
 			
 		}
 		case WALL_BANNER:
